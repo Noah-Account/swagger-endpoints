@@ -1,0 +1,57 @@
+parameters:
+  - name: "body"
+    in: "body"
+    description: "The item to update with both old_value and new_value"
+    required: true
+    schema:
+      type: object
+      properties:
+        old_value:
+          type: string
+          example: "Item 1"
+        new_value:
+          type: string
+          example: "Updated Item 1"
+responses:
+  200:
+    description: 'Item successfully removed'
+    schema:
+          type: object
+          properties:
+            message:
+              type: string
+    content:
+      application/json:
+        examples:
+          example1:
+            summary: 'Successful response'
+            value:
+              message: 'Item removed successfully'
+  400:
+    description: 'Bad Request'
+    schema:
+          type: object
+          properties:
+            message:
+              type: string
+    content:
+      application/json:
+        examples:
+          example1:
+            summary: 'Error response'
+            value:
+              message: 'Invalid request'
+  404: 
+    description: 'Not Found'
+    schema:
+          type: object
+          properties:
+            message:
+              type: string
+    content:
+      application/json:
+        examples:
+          example1:
+            summary: 'Error response'
+            value:
+              message: 'Invalid request - Item not found in list'

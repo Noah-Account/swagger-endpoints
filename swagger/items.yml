@@ -1,0 +1,20 @@
+definitions:
+  ItemsResponse:
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          type: string
+responses:
+  200:
+    description: 'Returns a list of items'
+    schema:
+      $ref: '#/definitions/ItemsResponse'
+    content:
+      application/json:
+        examples:
+          example1:
+            summary: 'Successful response'
+            value:
+              items: ['Item 1', 'Item 2', 'Item 3']
