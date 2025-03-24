@@ -5,22 +5,27 @@ from flasgger import Swagger, swag_from
 app = Flask(__name__)
 api = Api(app)
 
-# Configuring Swagger
+# Swagger konfigurieren
 app.config['SWAGGER'] = {
     'title': 'My API',
     'uiversion': 3
 }
 swagger = Swagger(app)
 
+# Beispiel Item Array
 items = ['Item 1', 'Item 2', 'Item 3']
 
+# Endpunkt Items definieren
 class Items(Resource):
+    # swag_from() Methode zum Laden der Swagger Endpunkt Konfiguration aus der im Pfad angegebenen Datei
     @swag_from('swagger/items.yml')
     def get(self):
         "This endpoint returns a list of items"
         return {'items': items}, 200
 
+# Endpunkt AddItem definieren
 class AddItem(Resource):
+    # swag_from() Methode zum Laden der Swagger Endpunkt Konfiguration aus der im Pfad angegebenen Datei
     @swag_from('swagger/add_items.yml')
     def post(self, item_name):
         if not item_name:
@@ -33,7 +38,9 @@ class AddItem(Resource):
         items.sort()
         return {'message': 'Item added successfully'}, 200
 
+# Endpunkt RemoveItem definieren
 class RemoveItem(Resource):
+    # swag_from() Methode zum Laden der Swagger Endpunkt Konfiguration aus der im Pfad angegebenen Datei
     @swag_from('swagger/remove_items.yml')
     def delete(self, item_name):
         if not item_name:
@@ -45,7 +52,9 @@ class RemoveItem(Resource):
         items.remove(item_name)
         return {'message': 'Item removed successfully'}, 200
     
+# Endpunkt UpdateItems definieren
 class UpdateItems(Resource):
+    # swag_from() Methode zum Laden der Swagger Endpunkt Konfiguration aus der im Pfad angegebenen Datei
     @swag_from('swagger/update_items.yml')
     def put(self):
         data = request.get_json()
@@ -64,6 +73,7 @@ class UpdateItems(Resource):
         
         return {'message': 'Item updated successfully'}, 200
 
+# Enpunkt Ressourcen der Api hinzufügen
 api.add_resource(Items, '/items')
 api.add_resource(AddItem, '/items/add/<string:item_name>')
 api.add_resource(RemoveItem, '/items/remove/<string:item_name>')
